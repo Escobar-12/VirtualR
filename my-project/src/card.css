@@ -1,20 +1,29 @@
-
-
 .card::before {
-    border:inherit;
+    border: inherit;
     border-radius: inherit;
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle 200px at var(--x) var(--y), rgba(255, 255, 255, 0.1), transparent);
-    opacity: 1;
-    z-index: 1;
-    top :0;
-    left:0;
+    background: radial-gradient(circle 200px at var(--x) var(--y), rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    transition: opacity 120ms ease-in-out; 
+}
+.card:hover::before {
+    opacity: .4;
+}
+.card:hover {
+    transform: scale(1.02);
+    transition: transform 120ms ease-in-out;
 }
 
-.card:hover
+@media (width <= 65rem) 
 {
-    transform: scale(1.02);
+    .card:hover::before
+    {
+        opacity: 0;
+    }
 }

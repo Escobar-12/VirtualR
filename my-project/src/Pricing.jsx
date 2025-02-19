@@ -19,10 +19,7 @@ function PricingPlan()
         document.querySelectorAll(".card").forEach((card)=>
             {
                 card.addEventListener("mousemove",handleMouseMove);
-                card.addEventListener("mouseleave", () => {
-                    card.style.setProperty("--x", "0px");
-                    card.style.setProperty("--y", "0px");
-                });
+                
             }
         )
         return () => document.querySelectorAll(".card").forEach((card)=>

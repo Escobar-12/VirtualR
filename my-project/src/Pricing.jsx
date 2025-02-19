@@ -1,15 +1,44 @@
 import { CheckCircle2 } from "lucide-react";
 import {pricingOptions} from "./constants"
+import { useEffect } from "react";
+import "./card.css"
 
 function PricingPlan()
 {
+    const handleMouseMove = (e) => 
+    {
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--x", `${x}px`);
+        card.style.setProperty("--y", `${y}px`);
+    };
+    useEffect(() => {
+        
+        document.querySelectorAll(".card").forEach((card)=>
+            {
+                card.addEventListener("mousemove",handleMouseMove);
+                card.addEventListener("mouseleave", () => {
+                    card.style.setProperty("--x", "0px");
+                    card.style.setProperty("--y", "0px");
+                });
+            }
+        )
+        return () => document.querySelectorAll(".card").forEach((card)=>
+        {
+            card.removeEventListener("mousemove", handleMouseMove);
+        });
+    }, []);
+
+
     return(
         <div id="Pricing" className=" mt-10 pt-20">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl text-center my-8">Pricing</h2>
-            <div className="flex flex-wrap justify-center space-y-3">
+            <div className="flex flex-wrap justify-center space-y-3 ">
                 {pricingOptions.map((price, index)=>(
-                    <div key={index} className="max-w-[920px] min-w-[260px] mx-1">
-                        <div className="p-5 border-1 border-neutral-700 rounded-xl">
+                    <div key={index} className="max-w-[920px] min-w-[260px] mx-1 relative ">
+                        <div className="p-5 border-1 border-neutral-700 rounded-xl card">
                             <p className="text-4xl mb-10">
                                 {price.title}
                                 {price.title === "Pro" && 

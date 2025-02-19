@@ -1,11 +1,29 @@
 import logo from "./assets/logo.png"
 import { navItems } from "./constants/index.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const NavBar = () =>
 {
     const [mobileStackOpen,setMobileStackOpen] = useState(false);
+
+    const checkOut = (e) =>
+    {
+        const area = document.querySelector(".mobNav");
+        if (area && !area.contains(e.target)) {
+            setMobileStackOpen(false);
+        }
+    }
+    useEffect(()=>
+    {
+        if(mobileStackOpen) document.addEventListener("mousedown",checkOut);
+        else
+        {
+            document.removeEventListener("mousedown",checkOut)
+        }
+    },[mobileStackOpen])
+
+
     function toggleNavBar()
     {
         setMobileStackOpen(!mobileStackOpen);
@@ -36,7 +54,7 @@ const NavBar = () =>
                     </div>
                 </div>
                 {mobileStackOpen && (
-                    <div className="lg:hidden fixed p-10 w-full right-0 bg-neutral-900 flex flex-col justify-center items-center">
+                    <div className="mobNav lg:hidden fixed p-10 w-full right-0 bg-neutral-900 flex flex-col justify-center items-center">
                         <ul className="py-5 space-y-5">
                             {navItems.map((items,index)=>(
                                 <li key={index}>

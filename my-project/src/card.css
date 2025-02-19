@@ -1,0 +1,20 @@
+
+
+.card::before {
+    border:inherit;
+    border-radius: inherit;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle 200px at var(--x) var(--y), rgba(255, 255, 255, 0.1), transparent);
+    opacity: 1;
+    z-index: 1;
+    top :0;
+    left:0;
+}
+
+.card:hover
+{
+    transform: scale(1.02);
+}
